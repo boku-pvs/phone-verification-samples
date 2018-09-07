@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Phone Verification</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="overlay" class="overlay" style="display:none">
+            <div class="outerSpinner">
+                <h2>Please wait while your request is being processed...</h2>
+                <div class="spinner"></div>
+            </div>
+        </div>
+        <div id="title">
+            <img class="logo" src="./img/danal-logo.png">
+            <h1>Phone Verification</h1>
+        </div>
+        <div id="mobileNumber">
+            <label for="mobileNumberInput">Mobile Number: </label>
+            <input id="mobileNumberInput" type="text" maxlength="12" placeholder="5555550002">
+            <input id="verifyMobileBtn" type="button" value="Verify">
+        </div>
+        <div id="pin" style="display:none">
+            <label for="pinInput">PIN: </label>
+            <input id="pinInput" type="text" maxlength="10" placeholder="123456">
+            <input id="verifyPinBtn" type="button" value="Verify">
+        </div>
+        <div id="verificationPassed" class="verification" style="display:none">
+            <h3>Verification Passed!</h3>
+            <img class="verification" src="./img/verification-passed.png">
+        </div>
+        <div id="verificationFailed" class="verification" style="display:none">
+            <h3>Verification Failed!</h3>
+            <img class="verification" src="./img/verification-failed.png">
+        </div>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>

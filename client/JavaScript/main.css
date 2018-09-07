@@ -1,0 +1,74 @@
+body {
+    padding: 10px;
+}
+
+#title {
+    display: inline-block;
+    margin: 5px 5px 20px 5px;
+}
+
+#title h1 {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+}
+
+.logo {
+    width: 20%;
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+.overlay {
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+.overlay > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 20px 5px #888;
+}
+
+div.outerSpinner {
+    max-width: 250px;
+}
+
+.overlay div h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.overlay div.spinner {
+    background: url(./img/spinner.gif) no-repeat;
+    width: 32px;
+    height: 32px;
+    margin: auto;
+}
+
+div.verification {
+    text-align: center;
+    margin-top: 40px;
+}
+
+img.verification {
+    width: 15%;
+}

@@ -1,0 +1,10 @@
+{
+  "name": "phoneverification-nodejs",
+  "description": "phoneverification sample app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body": "^5.1.0",
+    "moment": "^2.9.0"
+  }
+}
