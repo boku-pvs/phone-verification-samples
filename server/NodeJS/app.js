@@ -46,7 +46,8 @@ var handleRequest = function (req, res, body) {
                 encryptionAlgo: encryptionType,
                 cipherPadding: false
             });
-
+            auth = encodeURIComponent(auth);
+            mobileNumber = encodeURIComponent(mobileNumber);
             var responseMap = {
                 verifyPhoneNumber: danalBaseUrl + 'verifyPhoneNumber/' + mobileNumber + '/?authToken=' + auth,
                 verifySMSCode: danalBaseUrl + 'verifySMSCode/' + mobileNumber + '/?authToken=' + auth,
@@ -62,39 +63,3 @@ var handleRequest = function (req, res, body) {
     console.error(msg);
     res.end(JSON.stringify({err: msg}));
 };
-
-
-
-
-//
-//request({
-//    url: url,
-//    headers: {
-//        'Accept': 'application/json',
-//        'Content-Type': 'application/json',
-//        'Authorization': authorization.generate({
-//            aesKey: 'Xg8/C5qRfXL+U1/d11W2gA==',
-//            developerId: '00CA44300099',
-//            encryptionAlgo: 'aes-128-ctr',
-//            cipherPadding: false
-//        })
-//    },
-//    json: {
-//        appName: 'Danal Phone Verification',
-//        fallback: '1',
-//        smsMessage: ''
-//    },
-//    method: 'POST'
-//}, function (err, res, body) {
-//    if (err) {
-//        console.log('err=' + err);
-//    }
-//    if (res) {
-//        console.log('res=' + JSON.stringify(res));
-//    }
-//    if (!err && res.statusCode == 200) {
-//        var info = JSON.parse(body);
-//        console.log(info);
-//    }
-//});
-//var danalUrl = 'http://35.199.146.35:8080/devqa/api/v1/verifyPhoneNumber/+15555550002';

@@ -10,22 +10,28 @@ var DanalResponseStatus = {
 
 $(document).ready(function () {
     $('#verifyMobileBtn').click(getAuthorization);
-    $('#verifyPinBtn').click(verifySMSCode);
+    $('#verifySMSCodeBtn').click(verifySMSCode);
+    $('#resendCodeBtn').click(resendCode);
 });
 
 var getAuthorization = function () {
-    showSpinner();
+    clearMessages();
     setVerificationPassed(false);
     setVerificationFailed(false);
     var mobileNumber = $('#mobileNumberInput').val().trim();
-    postJson(serverUrl, {
-        mobileNumber: '+1' + mobileNumber
-    }, function (err, res) {
+    if (mobileNumber.length !== 10) {
+        return;
+    }
+    showSpinner();
+    getUrl(serverUrl + '?mobileNumber=' + encodeURIComponent('+1' + mobileNumber), function (err, res) {
         if (err || res.err) {
             hideSpinner();
             console.error('Failed to get authorization: ' + (err ? err : res.err));
         } else {
-            apiURLs = res;
+            for (var key in res) {
+                var value = res[key];
+                apiURLs[key] = decodeURIComponent(value);
+            }
             verifyMobileNumber();
         }
     });
@@ -49,9 +55,9 @@ function verifyMobileNumber() {
 
 function verifySMSCode() {
     showSpinner();
-    var pin = $('#pinInput').val().trim();
+    var code = $('#codeInput').val().trim();
     getJsonp(apiURLs.verifySMSCode, {
-        code: pin
+        code: code
     }, function (err, data) {
         if (err) {
             hideSpinner();
@@ -59,6 +65,24 @@ function verifySMSCode() {
         } else {
             console.log('SUCCESS: ' + JSON.stringify(data));
             handleDanalResponse(data);
+        }
+    });
+}
+
+function resendCode() {
+    showSpinner();
+    getJsonp(apiURLs.resendCode, {}, function (err, data) {
+        hideSpinner();
+        if (err) {
+            console.error('Failed to resend SMS Code: ' + err);
+        } else {
+            console.log('SUCCESS: ' + JSON.stringify(data));
+            var status = data.status;
+            if (status == DanalResponseStatus.SUCCESS) {
+                setMessage('Resent SMS Code');
+            } else {
+                setMessage('Failed to resend SMS Code: ' + err);
+            }
         }
     });
 }
@@ -77,23 +101,26 @@ function handleDanalResponse(response) {
         setVerificationFailed(true);
         resetApp();
     } else if (status == DanalResponseStatus.SWITCH_TO_FALLBACK) {
-        //sms fallback, enter pin
+        //sms fallback, enter code
         setMobileNumberVisibility(false);
-        setPinVisibility(true);
+        setCodeVisibility(true);
+        setMessage('Please enter SMS Code');
     } else {
         //error, try again later
         setVerificationPassed(false);
         setVerificationFailed(true);
         resetApp();
+        setMessage('Error identifying phone');
     }
 }
 
 function resetApp() {
     hideSpinner();
-    $('#pinInput').val('');
+    clearMessages();
+    $('#codeInput').val('');
     $('#mobileNumberInput').val('');
     setMobileNumberVisibility(true);
-    setPinVisibility(false);
+    setCodeVisibility(false);
 }
 
 function setMobileNumberVisibility(isVisible) {
@@ -104,11 +131,11 @@ function setMobileNumberVisibility(isVisible) {
     }
 }
 
-function setPinVisibility(isVisible) {
+function setCodeVisibility(isVisible) {
     if (isVisible) {
-        $('#pin').show();
+        $('#code').show();
     } else {
-        $('#pin').hide();
+        $('#code').hide();
     }
 }
 
@@ -136,15 +163,21 @@ function hideSpinner() {
     $('#overlay').hide();
 }
 
-//POST JSON body
-function postJson(url, data, cb, timeout) {
+function setMessage(msg) {
+    $('#messages p').html(msg);
+}
+
+function clearMessages() {
+    $('#messages p').html('');
+}
+
+function getUrl(url, cb, timeout) {
     if (typeof timeout === 'undefined') {
         timeout = 10000;
     }
-    console.log('API Call: ' + JSON.stringify(data));
+    console.log('GET on url=' + url);
     $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
+        type: 'GET',
         dataType: 'json',
         url: url,
         timeout: timeout,

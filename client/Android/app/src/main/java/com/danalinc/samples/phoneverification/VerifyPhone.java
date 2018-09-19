@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
         EditText mnView = findViewById(R.id.mobileNumberText);
         String mobileNumber = mnView.getText().toString().trim();
         if (mobileNumber.length() != 10) {
+            setProgressVisibility(false);
             showAlert("Please enter a valid 10-digit number");
             return;
         }
@@ -66,6 +68,7 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
         EditText pinView = findViewById(R.id.pinText);
         String pin = pinView.getText().toString().trim();
         if (pin.length() > 10) {
+            setProgressVisibility(false);
             //pin is currently length of 6, but here's some buffer in case that ever changes
             showAlert("Please enter a valid PIN");
             return;
@@ -82,6 +85,16 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
         httpHelper.execute(url, "verifySMSCode");
     }
 
+    private void resendCode() {
+        setProgressVisibility(true);
+        String url = (String) apiURLs.get("resendCode");
+        HttpHelper httpHelper = HttpHelper.builder()
+                .parameters(new HashMap<String, String>())
+                .listener(this)
+                .build();
+        httpHelper.execute(url, "resendCode");
+    }
+
     @Override
     public void onHttpCallCompleted(HttpResponse httpResponse) {
         try {
@@ -90,13 +103,27 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
                 if ("getAuthorization".equalsIgnoreCase(httpResponse.debug)) {
                     //now have the three API URLs (verifyPhoneNumber, verifySMSCode, resendCode)
                     apiURLs = httpResponse.response;
+                    for (Map.Entry<String, Object> entry : apiURLs.entrySet()) {
+                        String key = entry.getKey();
+                        Object value = entry.getValue();
+                        apiURLs.put(key, URLDecoder.decode((String) value, "UTF-8"));
+                    }
                     verifyPhone();
                 } else if ("verifyPhoneNumber".equalsIgnoreCase(httpResponse.debug)) {
                     handleDanalResponse(httpResponse);
                 } else if ("verifySMSCode".equalsIgnoreCase(httpResponse.debug)) {
                     handleDanalResponse(httpResponse);
+                } else if ("resendCode".equalsIgnoreCase(httpResponse.debug)) {
+                    setProgressVisibility(false);
+                    DanalResponseStatus status = getDanalStatus(httpResponse);
+                    if (status == DanalResponseStatus.SUCCESS) {
+                        snack("Resent SMS Code");
+                    } else {
+                        snack("Failed to resend SMS Code");
+                    }
                 } else {
                     //unhandled response
+                    setProgressVisibility(false);
                     showAlert(httpResponse.response.toString());
                 }
             } else {
@@ -112,12 +139,7 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
 
     private void handleDanalResponse(HttpResponse httpResponse) {
         setProgressVisibility(false);
-        Object objStatus = httpResponse.response.get("status");
-        if (objStatus instanceof Double) {
-            //gson can convert to a double
-            objStatus = ((Double) objStatus).intValue();
-        }
-        DanalResponseStatus status = DanalResponseStatus.fromValue(objStatus.toString());
+        DanalResponseStatus status = getDanalStatus(httpResponse);
         if (status == DanalResponseStatus.SUCCESS) {
             //phone verified
             setVerificationFailedVisibility(false);
@@ -138,6 +160,16 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
             setVerificationFailedVisibility(true);
             resetApp();
         }
+    }
+
+    private DanalResponseStatus getDanalStatus(HttpResponse httpResponse) {
+        Object objStatus = httpResponse.response.get("status");
+        if (objStatus instanceof Double) {
+            //gson can convert to a double
+            objStatus = ((Double) objStatus).intValue();
+        }
+        DanalResponseStatus status = DanalResponseStatus.fromValue(objStatus.toString());
+        return status;
     }
 
     private void resetApp() {
@@ -168,6 +200,7 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
         findViewById(R.id.pinLabel).setVisibility(visibility);
         findViewById(R.id.pinText).setVisibility(visibility);
         findViewById(R.id.pinFAB).setVisibility(visibility);
+        findViewById(R.id.resendFAB).setVisibility(visibility);
     }
 
     private void setProgressVisibility(boolean isVisible) {
@@ -240,6 +273,20 @@ public class VerifyPhone extends AppCompatActivity implements OnHttpCallComplete
             public void onClick(View view) {
                 try {
                     verifySMSCode();
+                    snack("Request sent");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    snack(e.getMessage());
+                }
+            }
+        });
+
+        FloatingActionButton resendFab = (FloatingActionButton) findViewById(R.id.resendFAB);
+        resendFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    resendCode();
                     snack("Request sent");
                 } catch (Exception e) {
                     e.printStackTrace();

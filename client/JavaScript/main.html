@@ -17,15 +17,19 @@
             <img class="logo" src="./img/danal-logo.png">
             <h1>Phone Verification</h1>
         </div>
+        <div id="messages">
+            <p></p>
+        </div>
         <div id="mobileNumber">
             <label for="mobileNumberInput">Mobile Number: </label>
             <input id="mobileNumberInput" type="text" maxlength="12" placeholder="5555550002">
             <input id="verifyMobileBtn" type="button" value="Verify">
         </div>
-        <div id="pin" style="display:none">
-            <label for="pinInput">PIN: </label>
-            <input id="pinInput" type="text" maxlength="10" placeholder="123456">
-            <input id="verifyPinBtn" type="button" value="Verify">
+        <div id="code" style="display:none">
+            <label for="codeInput">Code: </label>
+            <input id="codeInput" type="text" maxlength="10" placeholder="123456">
+            <input id="verifySMSCodeBtn" type="button" value="Verify">
+            <input id="resendCodeBtn" type="button" value="Resend">
         </div>
         <div id="verificationPassed" class="verification" style="display:none">
             <h3>Verification Passed!</h3>

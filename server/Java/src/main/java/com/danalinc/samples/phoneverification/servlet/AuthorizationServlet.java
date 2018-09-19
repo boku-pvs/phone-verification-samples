@@ -4,6 +4,8 @@ import com.danalinc.samples.phoneverification.Authorization;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,9 +52,9 @@ public class AuthorizationServlet extends HttpServlet {
                 String auth = authorization.generate();
 
                 Map<String, Object> responseMap = new HashMap<>();
-                responseMap.put("verifyPhoneNumber", DANAL_BASE_URL + "verifyPhoneNumber/" + mobileNumber + "/?authToken=" + auth);
-                responseMap.put("verifySMSCode", DANAL_BASE_URL + "verifySMSCode/" + mobileNumber + "/?authToken=" + auth);
-                responseMap.put("resendCode", DANAL_BASE_URL + "resendCode/" + mobileNumber + "/?authToken=" + auth);
+                responseMap.put("verifyPhoneNumber", getEncodedApiUrl("verifyPhoneNumber/", mobileNumber, auth));
+                responseMap.put("verifySMSCode", getEncodedApiUrl("verifySMSCode/", mobileNumber, auth));
+                responseMap.put("resendCode", getEncodedApiUrl("resendCode/", mobileNumber, auth));
                 String responseJson = GSON.toJson(responseMap);
 
                 OutputStream out = response.getOutputStream();
@@ -106,5 +108,9 @@ public class AuthorizationServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private Object getEncodedApiUrl(String context, String mobileNumber, String auth) throws UnsupportedEncodingException {
+        return URLEncoder.encode(DANAL_BASE_URL + context + URLEncoder.encode(mobileNumber, "UTF-8") + "/?authToken=" + URLEncoder.encode(auth, "UTF-8"), "UTF-8");
     }
 }
