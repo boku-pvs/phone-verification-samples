@@ -1,6 +1,6 @@
 General Guidelines About The iOS Sample Code:
 
-1. In Info.plist, the file has 'auth.svcs.verizon.com' as one of its NSExceptionDomains. This is needed, because Verizon redirect the Phone Verification API call to a HTTPS URL. In order for the redirect to work, Verizon's domain name has to be indicated in Info.plist.
+1. In Info.plist, the file has 'auth.svcs.verizon.com' as one of its NSExceptionDomains. This is needed, because Verizon redirects the Phone Verification API call to a HTTPS URL. In order for the redirect to work, Verizon's domain name has to be indicated in Info.plist.
 
 2. InitialViewController.swift is the view controller for the landing page of the app. 
 
