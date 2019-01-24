@@ -53,7 +53,7 @@
                                     <action selector="verifyPhoneNumber:" destination="57X-ZG-S2x" eventType="touchUpInside" id="Dcu-fV-OtN"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="DanalLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Axm-g7-zvX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BokuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Axm-g7-zvX">
                                 <rect key="frame" x="83" y="53" width="208" height="208"/>
                             </imageView>
                         </subviews>
@@ -320,7 +320,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DanalLogo" width="1024" height="1024"/>
+        <image name="BokuLogo" width="1024" height="1024"/>
         <image name="Failed" width="225" height="225"/>
         <image name="Success" width="1000" height="999"/>
     </resources>

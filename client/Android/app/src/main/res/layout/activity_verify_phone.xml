@@ -43,7 +43,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <ImageView
-        android:id="@+id/danalLogo"
+        android:id="@+id/bokuLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toStartOf="@+id/mainTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:srcCompat="@mipmap/danal_logo" />
+        app:srcCompat="@mipmap/boku_logo" />
 
     <TextView
         android:id="@+id/mainTitle"
@@ -92,7 +92,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/mobileNumberFAB"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/danalLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/bokuLogo" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mobileNumberFAB"

@@ -88,7 +88,7 @@ class InitialViewController: UIViewController {
         task.resume()
         semaphore.wait()
         
-        // The following URL request is an API call to Danal's phone verification process.
+        // The following URL request is an API call to Boku's phone verification process.
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         url = URL(string: appDelegate.verifyPhoneNumberURL!)!
         request = URLRequest(url: url)

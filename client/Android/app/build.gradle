@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.danalinc.samples.phoneverification"
+        applicationId "com.boku.samples.phoneverification"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
