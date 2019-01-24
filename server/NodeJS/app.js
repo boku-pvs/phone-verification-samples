@@ -7,7 +7,7 @@ var port = '3000';
 var aesKey = 'AES_KEY';
 var developerId = 'DEVELOPER_ID';
 var encryptionType = 'aes-128-ctr'; //default, check it is correct
-var danalBaseUrl = 'http://DANAL_BASE_URL/api/v1/';
+var bokuBaseUrl = 'http://BOKU_BASE_URL/api/v1/';
 
 
 var server = http.createServer(function (req, res) {
@@ -49,9 +49,9 @@ var handleRequest = function (req, res, body) {
             auth = encodeURIComponent(auth);
             mobileNumber = encodeURIComponent(mobileNumber);
             var responseMap = {
-                verifyPhoneNumber: danalBaseUrl + 'verifyPhoneNumber/' + mobileNumber + '/?authToken=' + auth,
-                verifySMSCode: danalBaseUrl + 'verifySMSCode/' + mobileNumber + '/?authToken=' + auth,
-                resendCode: danalBaseUrl + 'resendCode/' + mobileNumber + '/?authToken=' + auth
+                verifyPhoneNumber: bokuBaseUrl + 'verifyPhoneNumber/' + mobileNumber + '/?authToken=' + auth,
+                verifySMSCode: bokuBaseUrl + 'verifySMSCode/' + mobileNumber + '/?authToken=' + auth,
+                resendCode: bokuBaseUrl + 'resendCode/' + mobileNumber + '/?authToken=' + auth
             };
             return res.end(JSON.stringify(responseMap));
         } catch (e) {

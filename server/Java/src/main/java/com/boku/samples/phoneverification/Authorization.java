@@ -1,6 +1,6 @@
-package com.danalinc.samples.phoneverification;
+package com.boku.samples.phoneverification;
 
-import com.danalinc.samples.phoneverification.util.Base64;
+import com.boku.samples.phoneverification.util.Base64;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

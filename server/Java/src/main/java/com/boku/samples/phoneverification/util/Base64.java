@@ -1,4 +1,4 @@
-package com.danalinc.samples.phoneverification.util;
+package com.boku.samples.phoneverification.util;
 
 
 import java.util.Arrays;

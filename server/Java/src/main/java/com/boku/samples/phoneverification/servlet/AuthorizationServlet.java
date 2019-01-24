@@ -1,6 +1,6 @@
-package com.danalinc.samples.phoneverification.servlet;
+package com.boku.samples.phoneverification.servlet;
 
-import com.danalinc.samples.phoneverification.Authorization;
+import com.boku.samples.phoneverification.Authorization;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,7 +20,7 @@ public class AuthorizationServlet extends HttpServlet {
     private static final String AES_KEY = "AES_KEY";
     private static final String DEVELOPER_ID = "DEVELOPER_ID";
     private static final String ENCRYPTION_TYPE = "AES/CTR/NoPadding"; //default, check it is correct
-    private static final String DANAL_BASE_URL = "https://DANAL_BASE_URL/api/v1/";
+    private static final String BOKU_BASE_URL = "https://BOKU_BASE_URL/api/v1/";
     
 	private static final Gson GSON = new Gson();
 
@@ -111,6 +111,6 @@ public class AuthorizationServlet extends HttpServlet {
     }
 
     private Object getEncodedApiUrl(String context, String mobileNumber, String auth) throws UnsupportedEncodingException {
-        return URLEncoder.encode(DANAL_BASE_URL + context + URLEncoder.encode(mobileNumber, "UTF-8") + "/?authToken=" + URLEncoder.encode(auth, "UTF-8"), "UTF-8");
+        return URLEncoder.encode(BOKU_BASE_URL + context + URLEncoder.encode(mobileNumber, "UTF-8") + "/?authToken=" + URLEncoder.encode(auth, "UTF-8"), "UTF-8");
     }
 }
