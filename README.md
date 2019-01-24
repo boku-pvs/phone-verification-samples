@@ -1,14 +1,14 @@
 # Phone Verification Samples
 
-Sample code for clients and servers integrating with the Danal Phone Verification Service.
+Sample code for clients and servers integrating with the Boku Identity Phone Verification Service.
 
 ## Getting Started
 
 ### Servers
 
-Please take a look at the example server code which generates Danal API URLs to be used by the client.
+Please take a look at the example server code which generates Boku Identity API URLs to be used by the client.
 
-Credentials are stored on the server, and URLs with Authorization Tokens are generated on demand for the client.  Please update the placeholder values for API Key, Developer ID, Encryption Type, and Danal API URL if you plan to run and test the code.
+Credentials are stored on the server, and URLs with Authorization Tokens are generated on demand for the client.  Please update the placeholder values for API Key, Developer ID, Encryption Type, and Boku Identity API URL if you plan to run and test the code.
 
 ### Clients
 Once you have a server up and running, take a look at the client code for examples on client interaction with the server.

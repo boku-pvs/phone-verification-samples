@@ -1,7 +1,7 @@
 var apiURLs = {};
 var serverUrl = 'https://MY_SERVER_URL';
 
-var DanalResponseStatus = {
+var BokuResponseStatus = {
     SUCCESS: '1',
     FAILURE: '0',
     SWITCH_TO_FALLBACK: '2',
@@ -48,7 +48,7 @@ function verifyMobileNumber() {
             console.error('Failed to verify Mobile Number: ' + err);
         } else {
             console.log('SUCCESS: ' + JSON.stringify(data));
-            handleDanalResponse(data);
+            handleBokuResponse(data);
         }
     });
 }
@@ -64,7 +64,7 @@ function verifySMSCode() {
             console.error('Failed to verify SMS Code: ' + err);
         } else {
             console.log('SUCCESS: ' + JSON.stringify(data));
-            handleDanalResponse(data);
+            handleBokuResponse(data);
         }
     });
 }
@@ -78,7 +78,7 @@ function resendCode() {
         } else {
             console.log('SUCCESS: ' + JSON.stringify(data));
             var status = data.status;
-            if (status == DanalResponseStatus.SUCCESS) {
+            if (status == BokuResponseStatus.SUCCESS) {
                 setMessage('Resent SMS Code');
             } else {
                 setMessage('Failed to resend SMS Code: ' + err);
@@ -87,20 +87,20 @@ function resendCode() {
     });
 }
 
-function handleDanalResponse(response) {
+function handleBokuResponse(response) {
     hideSpinner();
     var status = response.status;
-    if (status == DanalResponseStatus.SUCCESS) {
+    if (status == BokuResponseStatus.SUCCESS) {
         //phone verified
         setVerificationPassed(true);
         setVerificationFailed(false);
         resetApp();
-    } else if (status == DanalResponseStatus.FAILURE) {
+    } else if (status == BokuResponseStatus.FAILURE) {
         //phone not verified
         setVerificationPassed(false);
         setVerificationFailed(true);
         resetApp();
-    } else if (status == DanalResponseStatus.SWITCH_TO_FALLBACK) {
+    } else if (status == BokuResponseStatus.SWITCH_TO_FALLBACK) {
         //sms fallback, enter code
         setMobileNumberVisibility(false);
         setCodeVisibility(true);
