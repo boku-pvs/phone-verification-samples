@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a7x-ug-7PX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a7x-ug-7PX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,7 +53,7 @@
                                     <action selector="verifyPhoneNumber:" destination="57X-ZG-S2x" eventType="touchUpInside" id="Dcu-fV-OtN"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BokuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Axm-g7-zvX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="BokuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Axm-g7-zvX">
                                 <rect key="frame" x="83" y="53" width="208" height="208"/>
                             </imageView>
                         </subviews>
@@ -320,12 +320,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BokuLogo" width="1024" height="1024"/>
+        <image name="BokuLogo" width="16" height="16"/>
         <image name="Failed" width="225" height="225"/>
         <image name="Success" width="1000" height="999"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mWR-A8-5ES"/>
-        <segue reference="jDQ-tu-LFa"/>
+        <segue reference="JXk-Sr-e02"/>
+        <segue reference="vfv-mZ-fXV"/>
     </inferredMetricsTieBreakers>
 </document>
